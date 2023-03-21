@@ -44,14 +44,14 @@ Add a new package source with the file path or URL to the local package director
 ## Usage
 1. **Configuring "Coree.Nupack" in your project** <br>
    The "Coree.Nupack" package is designed to simplify the process of building and distributing NuGet packages.<br>
-   "Coree.Nupack" includes a feature that automatically generates prerelease packages when building in debug mode and release packages when building in release mode. As well as automatic generation of VersionBuild and VersionRevision based on a date logic. This helps ensure that your packages are correctly labeled and versioned.
-   You can use the Visual Studio->Build->Pack feature to create and distribute your NuGet packages. Simply as you normally would, and the package will be automatically generated and pushed to the NuGet gallery if the NuGet key in the "NuPack.Secrets.props" file is configured."Coree.Nupack" provides several points of override and customization in the "Coree.NuPack.props" folder. These points allow you to easily edit and replace key elements of your NuGet package. Some of the most common points of override include:<br><br>
-"NuPack.Edit.props": This is a major metadata edit point where you can modify your package information to better suit your needs.<br>
-"NuPack.Secrets.props": If you've set your API key, the "pack" command will automatically push your package to the NuGet gallery, making it easier to distribute your package to others.<br>
-"ICON.png": This file can be easily overridden with your own icon, allowing you to customize the visual appearance of your package.<br>
-"LICENSE.txt": If you have your own license, simply replace the default "LICENSE.txt" file with your own to ensure that your package is properly licensed.<br>
-"ReleaseNotes.txt": Similarly, if you have specific release notes for your package, replace the default "ReleaseNotes.txt" file with your own notes.<br>
-"NuPack.Constants.props": If you want to change the default behavior of the package in some way, you can modify the constants in this file to better suit your needs.<br>
+   "Coree.Nupack" includes a feature that automatically generates prerelease packages when building in **debug configuration** and release packages when building in **release configuration**. As well as automatic generation of VersionBuild and VersionRevision based on a date logic. This helps ensure that your packages are correctly labeled and versioned.
+   You can use the **Visual Studio->Build->Pack feature** to create and distribute your NuGet packages. Simply as you normally would, and the package will be automatically generated and pushed to the NuGet gallery **if the NuGet key in the "NuPack.Secrets.props" file** is configured."Coree.Nupack" provides several points of override and customization in the **Coree.NuPack.props folder**. These points allow you to easily edit and replace key elements of your NuGet package. Some of the most common points of override include:<br><br>
+**NuPack.Edit.props**: This is a major metadata edit point where you can modify your package information to better suit your needs.<br>
+**NuPack.Secrets.props**: If you've set your API key, the "pack" command will automatically push your package to the NuGet gallery, making it easier to distribute your package to others.<br>
+**ICON.png**: This file can be easily overridden with your own icon, allowing you to customize the visual appearance of your package.<br>
+**LICENSE.txt**: If you have your own license, simply replace the default "LICENSE.txt" file with your own to ensure that your package is properly licensed.<br>
+**ReleaseNotes.txt**: Similarly, if you have specific release notes for your package, replace the default "ReleaseNotes.txt" file with your own notes.<br>
+**NuPack.Constants.props**: If you want to change the default behavior of the package in some way, you can modify the constants in this file to better suit your needs.<br>
 
 1. **Common Use Cases and Scenarios** <br>
     The "Coree.Nupack" package offers several benefits that can save time and simplify the process of building and distributing NuGet packages. Some common use cases and scenarios include:<br>
