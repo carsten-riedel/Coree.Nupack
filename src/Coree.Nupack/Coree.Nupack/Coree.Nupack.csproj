@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+
   </PropertyGroup>
   
   <PropertyGroup>
@@ -44,6 +45,7 @@ Coree.Nupack is a C# NuGet package for easy creation of NuGet packages during th
 
     <PackageTags>Coree;Coree.NuPack;NuPack</PackageTags>
     <DevelopmentDependency>true</DevelopmentDependency>
+	<PackageType>Dependency</PackageType>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <NoDefaultExcludes>true</NoDefaultExcludes>
 
@@ -72,7 +74,7 @@ Coree.Nupack is a C# NuGet package for easy creation of NuGet packages during th
 
   <Target Name="NuBuildPack" AfterTargets="PostBuildEvent">
     <Message Text="ProjectName: $(ProjectName)" Importance="high" />
-    <Exec Command="dotnet pack -p:PackageVersion=$(NugetVer) --no-build --configuration $(Configuration) --output &quot;$(NuGetDirOut)&quot;" />
+    <Exec Command="dotnet pack -p:PackageVersion=$(NugetVer) --no-dependencies --no-build --configuration $(Configuration) --output &quot;$(NuGetDirOut)&quot;" />
   </Target>
 
   <Target Name="NuBuildPackCopy" AfterTargets="Pack" Condition="'$(NuGetCopyDir)'!=''">
