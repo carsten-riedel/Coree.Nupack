@@ -59,15 +59,12 @@ Add a new package source with the file path or URL to the local package director
     Simplified editing: "Coree.Nupack" offers a centralized location for editing package variables, which makes it easier to manage and maintain the package. This can help reduce the risk of errors and ensure consistency across different packages.<br>
     Easy customization: "Coree.Nupack" includes default files that can be easily overwritten with customized versions. This allows developers to quickly customize the package to meet their specific requirements, without having to start from scratch.
 
-## Contributing
-- Guidelines for Contributing
-- Code of Conduct and Expectations for Contributors
-- Contribution Guidelines
-- List of Open Issues and Suggested Contributions
-
 ## License
-- License Information
-- Additional Terms and Conditions
-- Legal Notices or Disclaimers
+"Coree.Nupack" is licensed under the MIT License. This means that you are free to use, modify, and distribute the software as long as you include the original copyright notice and disclaimer.
+- License: MIT License
+- License Text: See [LICENSE](https://github.com/carsten-riedel/Coree.Nupack/blob/main/LICENSE) 
+
+- Disclaimer of Liability: The software is provided "AS IS" without warranty of any kind, either express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and non-infringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.
+
 
 
