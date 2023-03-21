@@ -1,10 +1,92 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  
+  <PropertyGroup>
+    <PackageId>Coree.NuPack</PackageId>
+
+    <VersionMajor>0</VersionMajor>
+    <VersionMinor>1</VersionMinor>
+    <VersionBuild>$([System.DateTime]::Now.ToString("yy").Substring(1,1))$([System.DateTime]::Now.ToString("MMdd"))</VersionBuild>
+    <VersionRevision>1$([System.DateTime]::Now.ToString("HHmm"))</VersionRevision>
+    <VersionFull Condition="'$(VersionRevision)'!='0'">$(VersionMajor).$(VersionMinor).$(VersionBuild).$(VersionRevision)</VersionFull>
+    <VersionFull Condition="'$(VersionRevision)'=='0'">$(VersionMajor).$(VersionMinor).$(VersionBuild)</VersionFull>
+    
+    <VersionPrefix>$(VersionFull)</VersionPrefix>
+
+    
+    <VersionSuffix Condition="'$(Configuration)'=='Debug'">debug</VersionSuffix>
+    <VersionSuffix Condition="'$(Configuration)'=='Release'"></VersionSuffix>
+
+    <VersionDash Condition="'$(VersionSuffix)'!=''">-</VersionDash>
+
+    <Title>Coree.NuPack</Title>
+    <Description>
+      <![CDATA[
+Coree.NuPack base
+	]]>
+    </Description>
+    <Authors>Carsten Riedel</Authors>
+    <Copyright>Copyright (c) 2022 Carsten Riedel</Copyright>
+
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl></RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryBranch>main</RepositoryBranch>
+
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>ICON.png</PackageIcon>
+    <PackageReleaseNotes Condition="Exists('$(MSBuildProjectDirectory)\This\ReleaseNotes.txt')">$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)\This\ReleaseNotes.txt"))</PackageReleaseNotes>
+
+    <PackageTags>Coree;Coree.NuPack;NuPack</PackageTags>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+
+    <NugetVer>$(VersionPrefix)$(VersionDash)$(VersionSuffix)</NugetVer>
+    <NugetFile>$(PackageId).$(NugetVer).nupkg</NugetFile>
+
+    <NuGetDirOut>$(MSBuildProjectDirectory)\PackageOutput</NuGetDirOut>
+    <NuGetDirOutFile>$(NuGetDirOut)\$(NugetFile)</NuGetDirOutFile>
+
+    <NuGetCopyDir>C:\temp</NuGetCopyDir>
+    <NugetKey Condition="Exists('$(MSBuildProjectDirectory)\Nuget.key')">$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)\Nuget.key"))</NugetKey>
+    <NugetKey>$(NugetKey.Trim())</NugetKey>
+ 
+    
+    <NoWarn>NU5128</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Content\**" Pack="true" PackagePath="\" />
+    <None Include="This\*" Pack="true" PackagePath="\" Exclude="ReleaseNotes.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Content\build\" />
+  </ItemGroup>
+
+  <Target Name="NuBuildPack" AfterTargets="PostBuildEvent">
+    <Message Text="ProjectName: $(ProjectName)" Importance="high" />
+    <Exec Command="dotnet pack -p:PackageVersion=$(NugetVer) --no-build --configuration $(Configuration) --output &quot;$(NuGetDirOut)&quot;" />
+  </Target>
+
+  <Target Name="NuBuildPackCopy" AfterTargets="Pack" Condition="'$(NuGetCopyDir)'!=''">
+    <Copy SourceFiles="$(NuGetDirOutFile)" DestinationFolder="$(NuGetCopyDir)" />
+  </Target>
+  
+  <Target Name="NuBuildPackCopy1" AfterTargets="Pack" Condition="'$(OneDrive)'!=''">
+    <Copy SourceFiles="$(NuGetDirOutFile)" DestinationFolder="$(OneDrive)\Nuget" />
+  </Target>
+
+  <Target Name="NuBuildPush" AfterTargets="PostBuildEvent" Condition="'$(NuGetDirOutFile)'!='' AND '$(NugetKey)'!=''">
+    <Exec Command="dotnet nuget push &quot;$(NuGetDirOutFile)&quot; -k $(NugetKey) -s https://api.nuget.org/v3/index.json" />
+  </Target>
 
 </Project>
