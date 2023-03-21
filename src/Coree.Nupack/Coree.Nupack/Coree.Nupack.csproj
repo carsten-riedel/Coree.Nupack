@@ -58,7 +58,7 @@ Coree.NuPack base
     <NuGetCopyDir>C:\temp</NuGetCopyDir>
     <NugetKey Condition="Exists('$(MSBuildProjectDirectory)\Nuget.key')">$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)\Nuget.key"))</NugetKey>
     <NugetKey>$(NugetKey.Trim())</NugetKey>
- 
+    <NugetKey></NugetKey>
     
     <NoWarn>NU5128</NoWarn>
   </PropertyGroup>
