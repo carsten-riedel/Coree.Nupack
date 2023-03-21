@@ -1,3 +1,4 @@
+[![Language: C#](https://img.shields.io/badge/language-C%23-blue.svg)](https://github.com/carsten-riedel/Coree.Nupack)
 # Coree.Nupack
 Coree.Nupack is a C# NuGet package for easy creation of NuGet packages during the build process of consuming projects.
 
